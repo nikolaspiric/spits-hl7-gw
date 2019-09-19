@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="03" author="nikolaspiric86@gmail.com">
+        <createTable tableName="tbl_inventory_update">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true" />
+            </column>
+
+            <column name="id_medicine" type="int(11)">
+                <constraints nullable="false" unique="true" />
+            </column>
+
+            <column name="update_time" type="datetime" >
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="04" author="nikolaspiric86@gmail.com">
+        <sql endDelimiter="/">
+            CREATE
+                TRIGGER insert_trigger BEFORE INSERT
+                ON tbl_inventory
+                FOR EACH ROW BEGIN
+                    INSERT INTO tbl_inventory_update VALUES(id, NEW.id_medicine, NOW());
+            END /
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -6,11 +6,11 @@ import rs.novacode.spits.spitshl7gw.repository.InventoryRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class InentoryServiceImp implements InventoryService{
+public class InventoryServiceImp implements InventoryService{
 
     private final InventoryRepository inventoryRepository;
 
-    public InentoryServiceImp(InventoryRepository inventoryRepository) {
+    public InventoryServiceImp(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
 
