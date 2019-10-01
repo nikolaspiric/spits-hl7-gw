@@ -31,11 +31,9 @@ public class ClientListenerConfigurationController {
     private static final Logger LOG = LoggerFactory.getLogger(ClientListenerConfigurationController.class);
 
     public static final String CONFIGURATION_CLIENTS_PATH = "/configuration/clients";
-    public static final String CONFIGURATION_CLIENTS_ONE_PATH = "/configuration/client/{clientName}";
-    public static final String CONFIGURATION_CLIENTS_PATH_CREATE = "/configuration/client";
-    public static final String CONFIGURATION_CLIENTS_PATH_GET = "/configuration/{id}";
-    public static final String CONFIGURATION_CLIENTS_PATH_DELETE = "/configuration/client/delete/{id}";
-    public static final String CONFIGURATION_CLIENTS_PATH_UPDATE = "/configuration/client/update/{id}";
+    public static final String CONFIGURATION_CLIENTS_PATH_ID = "/configuration/clients/{id}";
+    public static final String CONFIGURATION_CLIENTS_PATH_NAME = "/configuration/clients/{clientName}";
+    public static final String CONFIGURATION_CLIENTS_PATH_SEARCH = "/configuration/client";
     private static final String CT_HEADER_KEY_TOTAL = "X-Total";
 
     public ClientListenerConfigurationService clientListenerConfigurationService;
@@ -75,7 +73,7 @@ public class ClientListenerConfigurationController {
      * @param command
      * @return
      */
-    @PostMapping(path = CONFIGURATION_CLIENTS_PATH, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = CONFIGURATION_CLIENTS_PATH_SEARCH, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientListenerConfigurationDTO>> getClient(@RequestParam(value = SORT, required = false) String sort,
                                                                             @RequestParam( value = PAGE, required = false) Integer page,
                                                                             @RequestParam(value = SIZE, required = false) Integer size,
@@ -98,7 +96,7 @@ public class ClientListenerConfigurationController {
      * @param clientName
      * @return
      */
-    @GetMapping(path = CONFIGURATION_CLIENTS_ONE_PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = CONFIGURATION_CLIENTS_PATH_NAME, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientListenerConfiguration> getOneClientByClientName(@PathVariable("clientName") String clientName) {
 
         LOG.debug("Fetch configuration for client: {}", clientName);
@@ -115,14 +113,14 @@ public class ClientListenerConfigurationController {
      * @param clientListenerConfigurationCommand
      * @return
      */
-    @PostMapping(path = CONFIGURATION_CLIENTS_PATH_CREATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = CONFIGURATION_CLIENTS_PATH, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientListenerConfigurationDTO> createClientConfiguration(@Valid @RequestBody ClientListenerConfigurationCommand clientListenerConfigurationCommand){
 
         ClientListenerConfigurationDTO clientListenerConfigurationDTO = clientListenerConfigurationService.create(clientListenerConfigurationCommand.getClientName(), clientListenerConfigurationCommand.getIpAddress(), clientListenerConfigurationCommand.getPort());
         Map<String, String> uriParams = new HashMap<>();
         uriParams.put("id", clientListenerConfigurationDTO.getId().toString());
 
-        return created(UriComponentsBuilder.fromUriString(CONFIGURATION_CLIENTS_PATH_GET).buildAndExpand(uriParams).toUri()).body(clientListenerConfigurationDTO);
+        return created(UriComponentsBuilder.fromUriString(CONFIGURATION_CLIENTS_PATH_ID).buildAndExpand(uriParams).toUri()).body(clientListenerConfigurationDTO);
     }
 
 
@@ -132,7 +130,7 @@ public class ClientListenerConfigurationController {
      * @param command
      * @return
      */
-    @PutMapping(path = CONFIGURATION_CLIENTS_PATH_UPDATE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = CONFIGURATION_CLIENTS_PATH_ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClientListenerConfigurationDTO> updateClientConfiguration(@PathVariable("id") Long id,
                                                                                     @Valid @RequestBody ClientListenerConfigurationCommand command) {
 
@@ -153,7 +151,7 @@ public class ClientListenerConfigurationController {
      * @param id
      * @return
      */
-    @DeleteMapping(path = CONFIGURATION_CLIENTS_PATH_DELETE)
+    @DeleteMapping(path = CONFIGURATION_CLIENTS_PATH_ID)
     public ResponseEntity deleteClientConfiguration(@PathVariable("id") Long id) {
 
         clientListenerConfigurationService.delete(id);
