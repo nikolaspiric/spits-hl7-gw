@@ -6,17 +6,21 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.8.RELEASE")
-		classpath("io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${gradlePlugin}")
+		classpath("io.spring.gradle:dependency-management-plugin:${dependencyManagementPlugin}")
+		classpath("net.ltgt.gradle:gradle-apt-plugin:${gradleAptVersion}")
 	}
 }
+
 
 plugins {
 	id 'org.springframework.boot' version '2.1.8.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'net.ltgt.apt' version '0.20'
 	id 'java'
 	id 'idea'
 }
+apply plugin: 'net.ltgt.apt-idea'
 
 group = 'rs.novacode.spits'
 version = '0.0.1-SNAPSHOT'
@@ -34,7 +38,7 @@ repositories {
 
 dependencyManagement {
 	imports {
-		mavenBom("org.springframework.boot:spring-boot-starter-parent:2.1.8.RELEASE")
+		mavenBom("org.springframework.boot:spring-boot-starter-parent:${springBootStarterParent}")
 	}
 }
 
@@ -42,13 +46,25 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web")
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile("com.zaxxer:HikariCP:${hikariCPVersion}")
 	compile("com.h2database:h2")
 	compile('mysql:mysql-connector-java')
 	compile('org.liquibase:liquibase-core')
-	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-	compile('org.projectlombok:lombok')
-	compile("org.hibernate:hibernate-core:5.3.0.Final")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf:${thymeleafVersion}")
+	compile("org.thymeleaf:thymeleaf-spring5:${thymeleafSpringVersion}")
+	compile("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+	compile("org.hibernate:hibernate-core:${hibernateCoreVersion}")
 	compile("org.springframework.boot:spring-boot-starter-batch")
 	compile('org.springframework.boot:spring-boot-starter-test')
+
+	// lombok
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+	// mapper
+	compile("org.mapstruct:mapstruct-jdk8:${mapstruct}")
+	compile("org.mapstruct:mapstruct:${mapstruct}")
+	annotationProcessor("org.mapstruct:mapstruct-processor:${mapstructProcessor}")
+
 	testCompile group: 'junit', name: 'junit', version: '4.12'
 }
