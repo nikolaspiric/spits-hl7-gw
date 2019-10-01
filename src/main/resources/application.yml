@@ -2,6 +2,9 @@ server:
   port: 9000
 
 spring:
+  liquibase:
+    change-log: classpath:/db/db.changelog-master.xml
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/spits_db?useSSL=false&serverTimezone=UTC&maxReconnects=10&autoReconnect=true&nullNamePatternMatchesAll=true

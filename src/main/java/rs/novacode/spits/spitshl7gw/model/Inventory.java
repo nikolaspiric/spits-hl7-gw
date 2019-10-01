@@ -16,16 +16,16 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "id")
-    private String idMedicine;
+    @Column(name = "id_medicine")
+    private int idMedicine;
 
-    @Column(name = "name")
+    @Column(name = "name_medicine")
     private String nameMedicine;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity_medicine")
     private int quantityMedicine;
 
-    public Inventory(String idMedicine, String nameMedicine, int quantityMedicine) {
+    public Inventory(int idMedicine, String nameMedicine, int quantityMedicine) {
         this.idMedicine = idMedicine;
         this.nameMedicine = nameMedicine;
         this.quantityMedicine = quantityMedicine;
