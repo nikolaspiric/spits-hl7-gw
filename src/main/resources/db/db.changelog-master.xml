@@ -7,5 +7,7 @@
     <include file="changelog/01-initial-spitsdb-schema.xml" relativeToChangelogFile="true"/>
     <include file="changelog/02-inventory-medicine-data.xml" relativeToChangelogFile="true"/>
     <include file="changelog/03-inventory-update-medicine-schema.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/04-client-listener-configuration-schema.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/05-client-listener-configuration-data.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

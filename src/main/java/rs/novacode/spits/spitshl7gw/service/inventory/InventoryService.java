@@ -1,4 +1,4 @@
-package rs.novacode.spits.spitshl7gw.service;
+package rs.novacode.spits.spitshl7gw.service.inventory;
 
 import rs.novacode.spits.spitshl7gw.model.Inventory;
 
