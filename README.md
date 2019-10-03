@@ -20,7 +20,7 @@ For successful build and run a project, first you must open project directory in
 - http://localhost:8080/configuration/clients  (POST) -> create one client
 - http://localhost:8080/configuration/clients/{id} (DELETE) -> delete one client
 - http://localhost:8080/configuration/clients/{id} (PUT) -> update one client
-- http://localhost:8080/configuration/client/{clientName} -> fetch client by clientName
+- http://localhost:8080/configuration/client/{clientName} (GET) -> fetch client by clientName
 
 
 
