@@ -1,12 +1,13 @@
-package rs.novacode.spits.spitshl7gw.service;
+package rs.novacode.spits.spitshl7gw.service.inventory;
 
 import rs.novacode.spits.spitshl7gw.model.Inventory;
-import rs.novacode.spits.spitshl7gw.repository.InventoryRepository;
+import rs.novacode.spits.spitshl7gw.repository.inventory.InventoryRepository;
+import rs.novacode.spits.spitshl7gw.service.inventory.InventoryService;
 
 import java.util.List;
 import java.util.Optional;
 
-public class InventoryServiceImp implements InventoryService{
+public class InventoryServiceImp implements InventoryService {
 
     private final InventoryRepository inventoryRepository;
 

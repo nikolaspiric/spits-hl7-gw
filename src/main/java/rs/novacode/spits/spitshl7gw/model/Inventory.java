@@ -2,11 +2,13 @@ package rs.novacode.spits.spitshl7gw.model;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
 @ToString
 @Entity
 @Table(name = "tbl_inventory")
@@ -25,7 +27,7 @@ public class Inventory {
     @Column(name = "quantity_medicine")
     private int quantityMedicine;
 
-    public Inventory(int idMedicine, String nameMedicine, int quantityMedicine) {
+    Inventory(int idMedicine, String nameMedicine, int quantityMedicine) {
         this.idMedicine = idMedicine;
         this.nameMedicine = nameMedicine;
         this.quantityMedicine = quantityMedicine;

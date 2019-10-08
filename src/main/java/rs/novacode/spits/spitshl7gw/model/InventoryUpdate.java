@@ -1,12 +1,14 @@
 package rs.novacode.spits.spitshl7gw.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @ToString
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "tbl_inventory_update")
@@ -22,7 +24,7 @@ public class InventoryUpdate {
     @Column(name = "update_time")
     private LocalDateTime updateTime;
 
-    public InventoryUpdate(int idMedicine, LocalDateTime updateTime) {
+    InventoryUpdate(int idMedicine, LocalDateTime updateTime) {
         this.idMedicine = idMedicine;
         this.updateTime = updateTime;
     }
