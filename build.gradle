@@ -20,7 +20,9 @@ plugins {
 	id 'java'
 	id 'idea'
 }
+
 apply plugin: 'net.ltgt.apt-idea'
+apply from: 'gradle/docker.gradle'
 
 group = 'rs.novacode.spits'
 version = '0.0.1-SNAPSHOT'
@@ -50,8 +52,6 @@ dependencies {
 	compile("com.h2database:h2")
 	compile('mysql:mysql-connector-java')
 	compile('org.liquibase:liquibase-core')
-	compile("org.springframework.boot:spring-boot-starter-thymeleaf:${thymeleafVersion}")
-	compile("org.thymeleaf:thymeleaf-spring5:${thymeleafSpringVersion}")
 	compile("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
 	compile("org.hibernate:hibernate-core:${hibernateCoreVersion}")
 	compile("org.springframework.boot:spring-boot-starter-batch")
