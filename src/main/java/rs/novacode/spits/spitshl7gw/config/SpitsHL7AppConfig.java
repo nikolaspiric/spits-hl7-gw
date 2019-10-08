@@ -26,6 +26,7 @@ public class SpitsHL7AppConfig {
     }
 
 
+    // za front-end
     @Bean
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
